@@ -1,0 +1,7 @@
+<form>
+<label><h4>Trainings</h4></label>
+    <% Training.all.each do |t| %>
+      <label><%= t.name %></label>
+      <input type="checkbox" id="t_<%=training.id%>" name="user[training_ids]" value="<%= training.id %>"><br>
+    <%end%>
+</form>

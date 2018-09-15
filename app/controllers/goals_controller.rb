@@ -22,9 +22,9 @@ class GoalsController < ApplicationController
     if params[:content] == ""
       redirect to '/goals/new'
     end
-   @goal = Goal.new(content: params[:content])
-   @goal.user_id = current_user.id
-   @goal.save
+    @goal = Goal.new(content: params[:content])
+    @goal.user_id = current_user.id
+    @goal.save
 
     redirect to "/goals"
   end
