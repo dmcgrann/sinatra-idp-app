@@ -29,5 +29,37 @@ class GoalsController < ApplicationController
     redirect to "/goals"
   end
   
+  get '/goals/:id' do
+    if logged_in?
+      @goal = Goal.find_by_id(params[:id])
+      erb :"/goals/show_goal"
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/goals/:id/edit' do
+    if !logged_in?
+      redirect '/login'
+    else
+      @goal = Goal.find_by_id(params[:id])
+      if @goal && @goal.user == current_user
+        erb :'/goals/edit_goal'
+      else
+        redirect '/goals'
+      end
+    end
+  end
+
+  patch '/goals/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if !params[:content].empty?
+      @goal.update(content: params[:content])
+      redirect to "/goals/#{@tweet.id}"
+    else
+      redirect "/goals/#{params[:id]}/edit"
+    end
+  end
+  
   
 end
