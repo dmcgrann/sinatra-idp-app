@@ -52,10 +52,10 @@ class GoalsController < ApplicationController
   end
 
   patch '/goals/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
+    @goal = Goal.find_by_id(params[:id])
     if !params[:content].empty?
       @goal.update(content: params[:content])
-      redirect to "/goals/#{@tweet.id}"
+      redirect to "/goals/#{@goal.id}"
     else
       redirect "/goals/#{params[:id]}/edit"
     end
