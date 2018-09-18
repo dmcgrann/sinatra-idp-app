@@ -6,6 +6,5 @@ end
 
 use Rack::MethodOverride
 use GoalsController
-use TrainingsController
 use UsersController
 run ApplicationController
