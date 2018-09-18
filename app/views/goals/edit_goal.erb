@@ -1,5 +1,15 @@
-<form  action="/goals/<%=@goal.id%>" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <label>Goal:</label><input type="text" value="<%=@goal.content%>" name="content">
-  <input type="submit" value="submit">
+<form action="/goals/<%= @goal.id %>" method="POST">
+  <input type="hidden" name="_method" value="patch">
+  <label>Edit Goal</label>
+  <input type="text" id="goal_content" name="goal[content]" value="<%= @goal.content%>"><br></br>
+  
+  <label>Edit Status:</label><br>
+    <% Status.all.each do |status| %>
+    <label><%= status.content %></label>
+    <input type="checkbox" name="goal[status_ids][]" value="<%= status.id %>" id="<%= status.name %>" <%='checked' if @goal.statuses.include?(status) %>>
+  <% end %>
+ <label>Add New Status:</label>
+ <input type="text" id="new_status" name="status[name]"><br></br>
+ 
+ <input type="submit" value="Edit Goal">
 </form>
