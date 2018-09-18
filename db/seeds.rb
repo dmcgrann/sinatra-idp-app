@@ -1,16 +1,18 @@
-training_list = {
-    "Public Speaking" => {
+status_list = {
+    "Completed!!" => {
     },
-    "Training the Trainer" => {
+    "About done" => {
     },
-    "Dealing with Difficult People" => {
+    "Halfway there" => {
     },
-    "Persuasion 101" => {
+    "Just started" => {
+    },
+    "Still planning" => {
     }
   }
 
-training_list.each do |name, user_hash|
-  p = Training.new
+status_list.each do |name, user_hash|
+  p = Status.new
   p.name = name
   p.save
 end
