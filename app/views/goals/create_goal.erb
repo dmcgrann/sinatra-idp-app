@@ -1,14 +1,6 @@
 <form action="/goals" method="POST">
   <lable>Goal</label>
-    Name: <input type="text" id="goal_name" name="goal[name]"><br></br>
-    Content: <input type="text" id="goal_content" name="goal[content]"><br></br>
-    
-  <label><h4>Status</h4></label>
-    <% Status.all.each do |status| %>
-      <label><%= status.name %></label>
-      <input type="checkbox" id="status_<%=status.id%>" name="goal[status_ids][]" value="<%= status.id %>">
-    <% end %>
+    Content: <input type="text" name="content">
     <br></br>
- 
   <input type="submit" value="Create New Goal">
 </form>
