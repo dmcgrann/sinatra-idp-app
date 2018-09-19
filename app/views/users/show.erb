@@ -1,6 +1,8 @@
-<h3>Welcome, <%=@user.username%></h3>
-<ul>
-<% @user.goals.each do |goal|%>
-  <li><%=goal.name%></li>
-<%end%>
-</ul>
+<h2>Welcome, <%=@user.username%></h2>
+
+<h3>Current Goal List</h3>
+<% Goal.all.each do |goal| %>
+  <ul>
+    <li><a href="/goals/<%=goal.id%>"><%=goal.name%></a></br></li>
+  </ul>
+<% end %>

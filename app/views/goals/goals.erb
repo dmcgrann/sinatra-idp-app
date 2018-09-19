@@ -1,9 +1,12 @@
-<p>Welcome, <%=current_user.username %></p>
+<h2>Welcome, <%=current_user.username %></h2>
 <a href="/goals/new"> Create Goal </a></br>
 <a href="/objectives/new"> Add an Objective</a></br>
 <a href="/logout"> Log Out </a>
 
 <br></br>
+<h3>Current Goal List</h3>
 <% Goal.all.each do |goal| %>
-  <a href="/goals/<%=goal.id%>"><%=goal.name%></a></br>
+  <ul>
+    <li><a href="/goals/<%=goal.id%>"><%=goal.name%></a></br></li>
+  </ul>
 <% end %>
