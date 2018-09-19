@@ -2,10 +2,7 @@
 <a href="/goals/new"> Create Goal </a>
 <a href="/logout"> Log Out </a>
 
-<% @goals.each do |goal| %>
-  <%= goal.content %><br />
-  <%= goal.statuses %> <br />
-  <a href="/goals/<%=goal.id%>/edit">Edit</a>
-  <br />
-  <br />
+<br></br>
+<% Goal.all.each do |goal| %>
+  <%= goal.name %><br />
 <% end %>

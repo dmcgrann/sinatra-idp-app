@@ -1,7 +1,8 @@
 <form action="/goals/<%= @goal.id %>" method="POST">
   <input type="hidden" name="_method" value="patch">
   <label>Edit Goal</label>
-  <input type="text" id="goal_content" name="goal[content]" value="<%= @goal.content%>"><br></br>
+  Name: <input type="text" id="goal_name" name="goal[name]" value="<%= @goal.name%>"><br></br>
+  Content: <input type="text" id="goal_content" name="goal[content]" value="<%= @goal.content%>"><br></br>
   
   <label>Edit Status:</label><br>
     <% Status.all.each do |status| %>
