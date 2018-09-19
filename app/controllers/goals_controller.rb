@@ -53,7 +53,7 @@ class GoalsController < ApplicationController
 
   patch '/goals/:id' do
     @goal = Goal.find_by_id(params[:id])
-    if !params[:content].empty?
+    if params[:content] != ""
       @goal.update(content: params[:content])
       redirect to "/goals/#{@goal.id}"
     else

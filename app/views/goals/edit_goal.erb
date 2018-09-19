@@ -5,9 +5,10 @@
   
   <label>Edit Status:</label><br>
     <% Status.all.each do |status| %>
-    <label><%= status.content %></label>
+    <label><%= status.name %></label>
     <input type="checkbox" name="goal[status_ids][]" value="<%= status.id %>" id="<%= status.name %>" <%='checked' if @goal.statuses.include?(status) %>>
   <% end %>
+  <br></br>
  <label>Add New Status:</label>
  <input type="text" id="new_status" name="status[name]"><br></br>
  
