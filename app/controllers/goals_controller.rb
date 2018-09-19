@@ -3,7 +3,6 @@ class GoalsController < ApplicationController
   get '/goals' do
     if logged_in?
       @user = current_user
-      @goals = Goal.all
       erb :"/goals/goals"
     else
       redirect '/login'
@@ -22,10 +21,9 @@ class GoalsController < ApplicationController
     if params[:content] == ""
       redirect to '/goals/new'
     end
-    @goal = Goal.new(params[:goal])
+    @goal = Goal.new(content: params[:content])
     @goal.user_id = current_user.id
     @goal.save
-
     redirect to "/goals"
   end
   
@@ -53,8 +51,10 @@ class GoalsController < ApplicationController
 
   patch '/goals/:id' do
     @goal = Goal.find_by_id(params[:id])
-    @goal.update(params[:goal])
+    @goal.update(content: params[:content])
     @goal.save 
     redirect to "/goals/#{@goal.id}"
   end
+  
+  
 end

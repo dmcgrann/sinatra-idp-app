@@ -3,6 +3,6 @@
 <a href="/logout"> Log Out </a>
 
 <br></br>
-<% Goal.all.each do |goal| %>
-  <%= goal.name %><br />
-<% end %>
+<p><% Goal.all.each do |goal| %>
+  <%= goal.content %></br>
+<% end %></p>
