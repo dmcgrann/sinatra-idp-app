@@ -1,7 +1,7 @@
-class CreateGoal < ActiveRecord::Migration
+class CreateGoals < ActiveRecord::Migration
   def change
     create_table :goals do |t|
-      t.string :content
+      t.string :name
       t.integer :user_id
     end
   end

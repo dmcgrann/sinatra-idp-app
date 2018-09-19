@@ -18,10 +18,10 @@ class GoalsController < ApplicationController
   end
 
   post '/goals' do
-    if params[:content] == ""
+    if params[:name] == ""
       redirect to '/goals/new'
     end
-    @goal = Goal.new(content: params[:content])
+    @goal = Goal.new(name: params[:name])
     @goal.user_id = current_user.id
     @goal.save
     redirect to "/goals"
@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
 
   patch '/goals/:id' do
     @goal = Goal.find_by_id(params[:id])
-    @goal.update(content: params[:content])
+    @goal.update(name: params[:name])
     @goal.save 
     redirect to "/goals/#{@goal.id}"
   end
