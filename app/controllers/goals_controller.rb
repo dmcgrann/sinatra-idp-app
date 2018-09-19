@@ -56,6 +56,7 @@ class GoalsController < ApplicationController
     if params[:content] != ""
       @goal.update(name: params[:name], content: params[:content])
       redirect to "/goals/#{@goal.id}"
+      @goal.save
     else
       redirect "/goals/#{params[:id]}/edit"
     end
