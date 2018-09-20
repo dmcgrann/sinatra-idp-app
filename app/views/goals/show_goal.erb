@@ -1,4 +1,7 @@
-<h3><%= @goal.name%></h3><br>
+<h2>Goal</h2>
+<h3><%= @goal.name%></h3>
+<a href="/goals/<%=@goal.id%>/edit">Edit Goal</a>
+<br></br>
 
 <% @goal.objectives.each do |g|%>
   <em>Objective</em>: <%=g.content%><br>
