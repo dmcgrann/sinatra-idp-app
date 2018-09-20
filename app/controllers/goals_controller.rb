@@ -56,5 +56,18 @@ class GoalsController < ApplicationController
     redirect to "/goals/#{@goal.id}"
   end
   
+  delete '/goals/:id/delete' do
+    if !logged_in?
+			redirect to "/login"
+		else
+			@goal = Goal.find_by(params[:id])
+			if @goal && @goal.user == current_user
+        @goal.destroy
+        redirect "/goals"
+      else
+        redirect "/login"
+      end
+    end
+  end
   
 end

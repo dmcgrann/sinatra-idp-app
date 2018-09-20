@@ -1,6 +1,12 @@
 <h2>Goal</h2>
 <h3><%= @goal.name%></h3>
-<a href="/goals/<%=@goal.id%>/edit">Edit Goal</a>
+<button><a href="/goals/<%=@goal.id%>/edit">Edit Goal</a></button>
+<br></br>
+
+<form action="/goals/<%= @goal.id %>/delete" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" value="Delete Goal">
+</form>
 <br></br>
 
 <% @goal.objectives.each do |g|%>
