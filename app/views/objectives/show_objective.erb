@@ -2,4 +2,10 @@
 Objective: <%= @objective.content %><br>
 Deadline: <%= @objective.deadline %>
 <br></br>
-<a href="/objectives/<%=@objective.id%>/edit">Edit Objective</a>
+<button><a href="/objectives/<%=@objective.id%>/edit">Edit Objective</a></button>
+<br></br>
+<form action="/objectives/<%= @objective.id %>/delete" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" value="Delete Objective">
+</form>
+<br></br>
