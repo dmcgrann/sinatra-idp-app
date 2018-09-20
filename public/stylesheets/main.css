@@ -13,7 +13,7 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: blue;
+    background-color: #F7F6F6;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
@@ -50,6 +50,13 @@
   p {
     margin-bottom: 18px;
   }
+  
+  ul li {
+    list-style-type: circle;
+    list-style-position: inside;
+    padding: 1px;
+    margin-left: 20px;
+}
 
   .main {
     overflow: hidden;

@@ -1,15 +1,17 @@
 <form action="/objectives" method="post">
-<label>Development Objective</label>
+<h2>Development Objective</h2>
+    <textarea rows="4" cols="50" name="content"></textarea>
     <br></br>
-    Content: <input type="text" name="content">
-    <br></br>
-    Deadline: <input type="text" name="deadline">
+    <h3>Deadline:</label></h3>
+    <input type="text" name="deadline">
     <br></br>
     
+    <h3>Associated Goal:</h3>
     <select name="goal_id">
       <% current_user.goals.each do |goal| %>
         <option value=<%=goal.id%>><%=goal.name%></option>
       <%end%>
     </select>
-  <input type="submit" value="submit">
+    <br></br>
+  <input type="submit" value="Submit">
 </form>

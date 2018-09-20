@@ -1,6 +1,6 @@
-<h3><%= @goal.name%></h3>
+<h3><%= @goal.name%></h3><br>
 
 <% @goal.objectives.each do |g|%>
-  Objective: <%=g.content%><br>
-  Deadline: <%=g.deadline%><br></br>
+  <em>Objective</em>: <%=g.content%><br>
+  <em>Deadline</em>: <%=g.deadline%><br></br>
 <%end%>

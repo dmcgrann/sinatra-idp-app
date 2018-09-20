@@ -16,21 +16,19 @@
   <body>
     <header>
       <% if logged_in? %>
-        <h1>Welcome, <%=current_user.username! %></h1>
+        <h1>Welcome, <%=current_user.username.capitalize %></h1>
       <%end%>
     </header>
   
     <nav>
       <% if logged_in? %>
-        <a href="/goals/new"> Create Goal </a></br>
-        <a href="/objectives/new"> Add an Objective</a></br  >
+        <a href="/goals"> Menu </a> &nbsp; 
+        <a href="/goals/new"> Create Goal </a> &nbsp; 
+        <a href="/objectives/new"> Add an Objective</a> &nbsp; 
         <a href="/logout"> Log Out </a>
-     <%else%>
-        <a class='button' href='/login'>Log In</a>
-        <a class='button' href='/signup'>Sign Up</a>
       <%end%>
     </nav>
-  
+    
     <div class="wrapper">
         <%= yield %>
       <footer class="branding">
