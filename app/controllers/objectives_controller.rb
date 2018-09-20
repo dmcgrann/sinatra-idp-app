@@ -49,4 +49,15 @@ class ObjectivesController < ApplicationController
     redirect "/objectives/#{@objective.id}"
   end
   
+  delete '/objectives/:id/delete' do
+    if !logged_in?
+			redirect to "/login"
+		else
+			@objective = Objective.find_by(params[:id])
+			@objective.destroy
+      redirect "/objectives"
+    end
+  end
+  
+  
 end

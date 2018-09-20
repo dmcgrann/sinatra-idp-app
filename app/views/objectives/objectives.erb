@@ -1,5 +1,5 @@
 <h2>Objectives</h2>
 <p>Select an objective from the list below to edit or delete.</p><br>
-<% Objective.all.each do |o| %>
-  <li><a href="/objectives/<%=objective.id%>"><%=objective.name%></a></br></li>
+<% Objective.all.each do |objective| %>
+  <li><a href="/objectives/<%=objective.id%>"><%=objective.content%></a></br></li>
 <%end%>
