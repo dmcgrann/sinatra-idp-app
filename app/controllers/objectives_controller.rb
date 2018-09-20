@@ -9,11 +9,11 @@ class ObjectivesController < ApplicationController
   end
   
   get '/objectives/new' do
-    if !logged_in?
-      redirect '/login'
-    else
+    if logged_in? && current_user
       erb :"/objectives/create_objective"
-    end
+    else
+      redirect to "/login"
+		end
   end
 
   post '/objectives' do
@@ -34,11 +34,11 @@ class ObjectivesController < ApplicationController
   end
   
   get '/objectives/:id/edit' do
-    if !logged_in?
-      redirect '/login'
-    else
+    if logged_in? && current_user
       @objective = Objective.find_by_id(params[:id])
       erb :'/objectives/edit_objective'
+    else
+      redirect '/login'
     end
   end
   
@@ -50,14 +50,13 @@ class ObjectivesController < ApplicationController
   end
   
   delete '/objectives/:id/delete' do
-    if !logged_in?
-			redirect to "/login"
-		else
+    if logged_in? && current_user
 			@objective = Objective.find_by(params[:id])
 			@objective.destroy
       redirect "/objectives"
+    else
+      redirect to "/login"
     end
   end
-  
   
 end
