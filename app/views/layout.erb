@@ -14,11 +14,25 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    <header>
+      <% if logged_in? %>
+        <h1>Welcome, <%=current_user.username! %></h1>
+      <%end%>
+    </header>
+  
+    <nav>
+      <% if logged_in? %>
+        <a href="/goals/new"> Create Goal </a></br>
+        <a href="/objectives/new"> Add an Objective</a></br  >
+        <a href="/logout"> Log Out </a>
+     <%else%>
+        <a class='button' href='/login'>Log In</a>
+        <a class='button' href='/signup'>Sign Up</a>
+      <%end%>
+    </nav>
   
     <div class="wrapper">
-
         <%= yield %>
-
       <footer class="branding">
         <small>&copy; 2018 <strong>SinatraIdpApp</strong></small>
       </footer>
