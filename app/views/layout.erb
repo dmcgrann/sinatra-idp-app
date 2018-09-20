@@ -17,6 +17,8 @@
     <header>
       <% if logged_in? %>
         <h1>Welcome, <%=current_user.username.capitalize %></h1>
+      <%else%>
+        <h1>Welcome to the IPD App</h1>
       <%end%>
     </header>
   
@@ -28,13 +30,14 @@
         <a href="/logout"> Log Out </a>
       <%end%>
     </nav>
-    
-    <div class="wrapper">
-        <%= yield %>
-      <footer class="branding">
-        <small>&copy; 2018 <strong>SinatraIdpApp</strong></small>
-      </footer>
-    </div>
+    <section class="medium-fade">
+      <div class="wrapper">
+          <%= yield %>
+        <footer class="branding">
+          <small>&copy; 2018 <strong>SinatraIdpApp</strong  ></small>
+        </footer>
+      </div>
+    </section>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 7]>
