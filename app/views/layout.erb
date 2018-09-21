@@ -20,16 +20,16 @@
       <%else%>
         <h1>Welcome to the IPD App</h1>
       <%end%>
-    </header>
   
-    <nav>
-      <% if logged_in? %>
-        <a href="/goals"> Menu </a> &nbsp; 
-        <a href="/goals/new"> Create Goal </a> &nbsp; 
-        <a href="/objectives/new"> Add an Objective</a> &nbsp; 
-        <a href="/logout"> Log Out </a>
-      <%end%>
-    </nav>
+      <nav>
+        <% if logged_in? %>
+          <a href="/goals"> Menu </a> 
+          <a href="/goals/new"> Create Goal </a>
+          <a href="/objectives/new"> Add an Objective</a>
+          <a href="/logout"> Log Out </a>
+        <%end%>
+      </nav>
+    </header>
     <section class="medium-fade">
       <div class="wrapper">
         <%= yield %>
