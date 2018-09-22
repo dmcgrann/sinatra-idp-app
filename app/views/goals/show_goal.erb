@@ -1,6 +1,14 @@
 <h2>Goal</h2>
 <h3><%= @goal.name%></h3>
+<% @goal.objectives.each do |g|%>
+  <em>Objective</em>: <%=g.content%><br>
+  <em>Deadline</em>: <%=g.deadline%><br></br>
+<%end%>
+
 <button><a href="/goals/<%=@goal.id%>/edit">Edit Goal</a></button>
+<br></br>
+
+<button><a href="/objectives/new">Add an Objective</a></button>
 <br></br>
 
 <form action="/goals/<%= @goal.id %>/delete" method="POST">
@@ -8,10 +16,5 @@
 	<input type="submit" value="Delete Goal">
 </form>
 <br></br>
-
-<% @goal.objectives.each do |g|%>
-  <em>Objective</em>: <%=g.content%><br>
-  <em>Deadline</em>: <%=g.deadline%><br></br>
-<%end%>
 
 <a href="/objectives">View the full list of your objectives to edit or delete an objective.</a>
