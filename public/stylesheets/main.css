@@ -22,10 +22,14 @@
     padding: 20px 0 20px;
   }
   
+  
   button > a {
+    padding: 10px 7px 10px;
     text-decoration: none;
     color: black;
   }
+  
+  
   
   nav a {
   display: inline-block;

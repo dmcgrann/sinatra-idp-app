@@ -1,7 +1,7 @@
 <form action="/objectives/<%= @objective.id %>" method="POST">
   <input type="hidden" name="_method" value="patch">
   <h2>Edit Objective</h2>
-  <input type="text" name="content" value="<%= @objective.content%>">
+  <textarea rows="4" cols="50" name="content"><%= @objective.content%></textarea>
   <br></br>
   <h3>Deadline</h3>
   <input type="text" name="deadline" value="<%= @objective.deadline%>">
