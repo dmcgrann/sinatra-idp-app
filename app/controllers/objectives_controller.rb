@@ -35,8 +35,8 @@ class ObjectivesController < ApplicationController
   patch '/objectives/:id' do
     redirect_if_not_logged_in
     @objective = Objective.find_by_id(params[:id])
-    if params[:content] == ""
-      redirect "/objectives?error=an objective cannot be blank"
+    if params[:content] == "" || !current_user
+      redirect "/objectives?error=invalid entry"
     else
       @objective.update(content: params[:content], deadline: params[:deadline])
       @objective.save
@@ -46,9 +46,13 @@ class ObjectivesController < ApplicationController
   
   delete '/objectives/:id/delete' do
     redirect_if_not_logged_in
-		@objective = Objective.find_by(params[:id])
-		@objective.destroy
-    redirect "/objectives"
+    if params[:content] == "" || !current_user
+      redirect "/objectives?error=invalid entry"
+    else
+		  @objective = Objective.find_by(params[:id])
+		  @objective.destroy
+      redirect "/objectives"
+    end
   end
   
 end
