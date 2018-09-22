@@ -4,6 +4,14 @@
   
   Objective: <input type="text" name="content" value="<%= @objective.content%>"><br>
   Deadline: <input type="text" name="deadline" value="<%= @objective.deadline%>">
+  
+  <h3>Associated Goal:</h3>
+    <select name="goal_id">
+      <% current_user.goals.each do |goal| %>
+        <option value=<%=goal.id%><%= "selected" if goal.id == @objective.goal_id%>><%=goal.name%></option>
+      <%end%>
+    </select>
+    <br></br>
   <br></br>
   <input type="submit" value="Edit Objective">
 </form>

@@ -19,6 +19,7 @@ class GoalsController < ApplicationController
       redirect "/goals/new?error=must be a valid goal"
     end
     @goal = Goal.new(name: params[:name])
+    @goal.user_id = current_user.id
     @goal.save
     redirect to "/goals"
   end
@@ -44,6 +45,7 @@ class GoalsController < ApplicationController
       redirect "/goals?error=a goal cannot be blank"
     end
     @goal.update(name: params[:name])
+    @goal.user_id = current_user.id
     @goal.save 
     redirect to "/goals/#{@goal.id}"
   end
