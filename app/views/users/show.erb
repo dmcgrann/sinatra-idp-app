@@ -1,5 +1,5 @@
 <h2>Current Goal List</h2>
-<% Goal.all.each do |goal| %>
+<% current_user.goals.each do |goal| %>
   <ul>
     <li><a href="/goals/<%=goal.id%>"><%=goal.name%></a></br></li>
   </ul>
