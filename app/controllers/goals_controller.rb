@@ -41,11 +41,10 @@ class GoalsController < ApplicationController
   patch '/goals/:id' do
     redirect_if_not_logged_in
     @goal = Goal.find_by_id(params[:id])
-    if params[:name] == ""
-      redirect "/goals?error=a goal cannot be blank"
+    if params[:name] == "" || @goal.user_id != current_user.id
+      redirect "/goals?error=action not permitted"
     end
     @goal.update(name: params[:name])
-    @goal.user_id = current_user.id
     @goal.save 
     redirect to "/goals/#{@goal.id}"
   end
@@ -53,11 +52,12 @@ class GoalsController < ApplicationController
   delete '/goals/:id/delete' do
     redirect_if_not_logged_in
     @goal = Goal.find_by(params[:id])
-    if params[:name] == ""
+    if @goal.user_id = current_user.id
+      @goal.destroy
       redirect "/goals"
+    else
+      redirect "/goals?error=action not permitted"
     end
-    @goal.destroy
-    redirect "/goals"
   end
   
 end
