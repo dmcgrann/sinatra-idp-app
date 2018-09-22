@@ -89,6 +89,12 @@
     margin-left: 20px;
 }
 
+  .alert {
+    color: red;
+    font-weight: bold;
+    margin: 1em 0 1em 0;
+  }
+
   .main {
     overflow: hidden;
   }
