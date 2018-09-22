@@ -1,10 +1,11 @@
 <form action="/objectives/<%= @objective.id %>" method="POST">
   <input type="hidden" name="_method" value="patch">
   <h2>Edit Objective</h2>
-  
-  Objective: <input type="text" name="content" value="<%= @objective.content%>"><br>
-  Deadline: <input type="text" name="deadline" value="<%= @objective.deadline%>">
-  
+  <input type="text" name="content" value="<%= @objective.content%>">
+  <br></br>
+  <h3>Deadline</h3>
+  <input type="text" name="deadline" value="<%= @objective.deadline%>">
+  <br></br>
   <h3>Associated Goal:</h3>
     <select name="goal_id">
       <% current_user.goals.each do |goal| %>
