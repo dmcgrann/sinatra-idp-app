@@ -1,61 +1,58 @@
 class ObjectivesController < ApplicationController
   
   get '/objectives' do
-    if logged_in?
-      erb :"/objectives/objectives"
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    erb :"/objectives/objectives"
   end
   
   get '/objectives/new' do
-    if logged_in? && current_user
-      erb :"/objectives/create_objective"
-    else
-      redirect to "/login"
-		end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    erb :"/objectives/create_objective"
   end
 
   post '/objectives' do
+    redirect_if_not_logged_in
     if params[:content] == ""
-      redirect to '/objectives/new'
+      redirect "/objectives/new?error=must be a valid objective"
     end
     Objective.create(params)
     redirect to "/objectives"
   end
   
   get '/objectives/:id' do
-    if logged_in?
-      @objective = Objective.find_by_id(params[:id])
-      erb :"/objectives/show_objective"
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @objective = Objective.find_by_id(params[:id])
+    erb :"/objectives/show_objective"
   end
   
   get '/objectives/:id/edit' do
-    if logged_in? && current_user
-      @objective = Objective.find_by_id(params[:id])
-      erb :'/objectives/edit_objective'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @objective = Objective.find_by_id(params[:id])
+    erb :'/objectives/edit_objective'
   end
   
   patch '/objectives/:id' do
+    redirect_if_not_logged_in
     @objective = Objective.find_by_id(params[:id])
+    if params[:content] == ""
+      redirect "/objectives?error=an objective cannot be blank"
+    end
     @objective.update(content: params[:content], deadline: params[:deadline])
     @objective.save
     redirect "/objectives/#{@objective.id}"
   end
   
   delete '/objectives/:id/delete' do
-    if logged_in? && current_user
-			@objective = Objective.find_by(params[:id])
-			@objective.destroy
+    redirect_if_not_logged_in
+		@objective = Objective.find_by(params[:id])
+		if params[:name] == ""
       redirect "/objectives"
     else
-      redirect to "/login"
+			@objective.destroy
+      redirect "/objectives"
     end
   end
   
