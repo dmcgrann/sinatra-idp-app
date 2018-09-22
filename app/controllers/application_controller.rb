@@ -14,6 +14,12 @@ class ApplicationController < Sinatra::Base
   end
   
   helpers do
+    
+    def redirect_if_not_logged_in
+      if !logged_in?
+        redirect "/login?error=Please login to continue."
+      end
+    end
 
     def logged_in?
       !!session[:user_id]

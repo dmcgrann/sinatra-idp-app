@@ -1,73 +1,61 @@
 class GoalsController < ApplicationController
   
   get '/goals' do
-    if logged_in?
-      @user = current_user
-      erb :"/goals/goals"
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @goals = Goal.all 
+    erb :"/goals/goals"
   end
   
-   get '/goals/new' do
-    if !logged_in?
-      redirect '/login'
-    else
-      erb :"/goals/create_goal"
-    end
+  get '/goals/new' do
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    erb :"/goals/create_goal"
   end
 
   post '/goals' do
+    redirect_if_not_logged_in
+    
     if params[:name] == ""
-      redirect to '/goals/new'
+      redirect "/goals/new?error=must be a valid goal"
     end
     @goal = Goal.new(name: params[:name])
-    @goal.user_id = current_user.id
     @goal.save
     redirect to "/goals"
   end
   
   get '/goals/:id' do
-    if logged_in?
-      @goal = Goal.find_by_id(params[:id])
-      erb :"/goals/show_goal"
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @goal = Goal.find_by_id(params[:id])
+    erb :"/goals/show_goal"
   end
 
   get '/goals/:id/edit' do
-    if !logged_in?
-      redirect '/login'
-    else
-      @goal = Goal.find_by_id(params[:id])
-      if @goal && @goal.user == current_user
-        erb :'/goals/edit_goal'
-      else
-        redirect '/goals'
-      end
-    end
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @goal = Goal.find_by_id(params[:id])
+    erb :'/goals/edit_goal'
   end
 
   patch '/goals/:id' do
+    redirect_if_not_logged_in
     @goal = Goal.find_by_id(params[:id])
+    if params[:name] == ""
+      redirect "/goals?error=a goal cannot be blank"
+    end
     @goal.update(name: params[:name])
     @goal.save 
     redirect to "/goals/#{@goal.id}"
   end
   
   delete '/goals/:id/delete' do
-    if !logged_in?
-			redirect to "/login"
-		else
-			@goal = Goal.find_by(params[:id])
-			if @goal && @goal.user == current_user
-        @goal.destroy
-        redirect "/goals"
-      else
-        redirect "/login"
-      end
+    redirect_if_not_logged_in
+    @goal = Goal.find_by(params[:id])
+    if params[:name] == ""
+      redirect "/goals"
     end
+    @goal.destroy
+    redirect "/goals"
   end
   
 end
