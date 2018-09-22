@@ -1,5 +1,7 @@
 <h2>Objectives</h2>
-<p>Select an objective from the list below to edit or delete.</p><br>
-<% Objective.all.each do |objective| %>
-  <li><a href="/objectives/<%=objective.id%>"><%=objective.content%></a></br></li>
+<p>Select an objective from the list below to edit or delete, <a href="/goals"> return to goal list </a> .</p>
+<% current_user.goals.each do |goal| %>
+  <% goal.objectives.each do |objective| %>
+    <li><a href="/objectives/<%=objective.id%>"><%=objective.content%></a></br></li>
+  <%end%>
 <%end%>

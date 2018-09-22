@@ -1,8 +1,8 @@
 <h2>Instructions</h2>
-<p>Below you will find your list of goals. Each goal should have associated objectives. Use the menu items above to create goals and objectives. The objectives form will allow you to connect an objective with a goal.</p>
+<p>Below you will find your list of goals. Each goal should have associated objectives. The objectives form will allow you to connect an objective with a goal.</p>
 
 <h2>Current Goal List</h2>
-<p>Choose a goal to view associated objectives or <a href="/goals/new"> create a new goal </a>.</p>
+<p>Choose a goal to view and/or add associated objectives, or <a href="/goals/new"> create a new goal </a>.</p>
 <% current_user.goals.each do |goal| %>
   <ul>
     <li><a href="/goals/<%=goal.id%>"><%=goal.name%></a></br></li>
