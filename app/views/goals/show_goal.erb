@@ -9,12 +9,12 @@
 <br></br>
 
 <button><a href="/objectives/new">Add an Objective</a></button><br></br>
-<a href="/objectives">View the full list of your objectives to edit or delete an objective.</a>
+<a href="/objectives">View the full list of your objectives to edit an objective.</a>
 <br></br>
 
 <form action="/goals/<%= @goal.id %>/delete" method="POST">
 	<input type="hidden" name="_method" value="DELETE">
 	<input type="submit" value="Delete Goal">
-	<p class=alert>Be sure to delete all associated objectives before deleting a goal.</p>
+	<p class=alert>When you delete a goal, all associated objectives will also be deleted.</p>
 </form>
 
