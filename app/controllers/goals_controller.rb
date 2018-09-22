@@ -8,7 +8,6 @@ class GoalsController < ApplicationController
   
   get '/goals/new' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     erb :"/goals/create_goal"
   end
 
@@ -26,14 +25,12 @@ class GoalsController < ApplicationController
   
   get '/goals/:id' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     @goal = Goal.find_by_id(params[:id])
     erb :"/goals/show_goal"
   end
 
   get '/goals/:id/edit' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     @goal = Goal.find_by_id(params[:id])
     erb :'/goals/edit_goal'
   end

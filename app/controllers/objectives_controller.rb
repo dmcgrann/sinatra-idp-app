@@ -7,7 +7,6 @@ class ObjectivesController < ApplicationController
   
   get '/objectives/new' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     erb :"/objectives/create_objective"
   end
 
@@ -23,14 +22,12 @@ class ObjectivesController < ApplicationController
   
   get '/objectives/:id' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     @objective = Objective.find_by_id(params[:id])
     erb :"/objectives/show_objective"
   end
   
   get '/objectives/:id/edit' do
     redirect_if_not_logged_in
-    @error_message = params[:error]
     @objective = Objective.find_by_id(params[:id])
     erb :'/objectives/edit_objective'
   end
@@ -40,17 +37,20 @@ class ObjectivesController < ApplicationController
     @objective = Objective.find_by_id(params[:id])
     if params[:content] == ""
       redirect "/objectives?error=an objective cannot be blank"
+    elsif current_user.id != @objective.user_id
+      redirect "/objectives/new?error=invalid action"
+    else
+      @objective.update(content: params[:content], deadline: params[:deadline])
+      @objective.save
+      redirect "/objectives/#{@objective.id}"
     end
-    @objective.update(content: params[:content], deadline: params[:deadline])
-    @objective.save
-    redirect "/objectives/#{@objective.id}"
   end
   
   delete '/objectives/:id/delete' do
     redirect_if_not_logged_in
 		@objective = Objective.find_by(params[:id])
-		if params[:name] == ""
-      redirect "/objectives"
+		if current_user.id != @objective.user_id
+      redirect "/objectives?error=cannot delete this objective"
     else
 			@objective.destroy
       redirect "/objectives"
