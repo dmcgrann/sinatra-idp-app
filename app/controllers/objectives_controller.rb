@@ -37,8 +37,6 @@ class ObjectivesController < ApplicationController
     @objective = Objective.find_by_id(params[:id])
     if params[:content] == ""
       redirect "/objectives?error=an objective cannot be blank"
-    elsif current_user.id != @objective.user_id
-      redirect "/objectives/new?error=invalid action"
     else
       @objective.update(content: params[:content], deadline: params[:deadline])
       @objective.save
@@ -49,12 +47,8 @@ class ObjectivesController < ApplicationController
   delete '/objectives/:id/delete' do
     redirect_if_not_logged_in
 		@objective = Objective.find_by(params[:id])
-		if current_user.id != @objective.user_id
-      redirect "/objectives?error=cannot delete this objective"
-    else
-			@objective.destroy
-      redirect "/objectives"
-    end
+		@objective.destroy
+    redirect "/objectives"
   end
   
 end
