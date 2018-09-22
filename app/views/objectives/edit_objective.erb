@@ -6,13 +6,5 @@
   <h3>Deadline</h3>
   <input type="text" name="deadline" value="<%= @objective.deadline%>">
   <br></br>
-  <h3>Associated Goal:</h3>
-    <select name="goal_id">
-      <% current_user.goals.each do |goal| %>
-        <option value=<%=goal.id%><%= "selected" if goal.id == @objective.goal_id%>><%=goal.name%></option>
-      <%end%>
-    </select>
-    <br></br>
-  <br></br>
   <input type="submit" value="Edit Objective">
 </form>

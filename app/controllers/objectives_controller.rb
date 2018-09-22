@@ -16,7 +16,7 @@ class ObjectivesController < ApplicationController
     if params[:content] == ""
       redirect "/objectives/new?error=must be a valid objective"
     end
-    @objective = Objective.new(content: params[:content], deadline: params[:deadline])
+    @objective = Objective.new(content: params[:content], deadline: params[:deadline], goal_id: params[:goal_id])
     @objective.save
     redirect to "/objectives"
   end
