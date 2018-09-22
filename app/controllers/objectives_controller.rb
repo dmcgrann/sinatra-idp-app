@@ -46,7 +46,7 @@ class ObjectivesController < ApplicationController
   
   delete '/objectives/:id/delete' do
     redirect_if_not_logged_in
-    if params[:content] == "" || !current_user
+    if params[:content] == "" || !current_user.id
       redirect "/objectives?error=invalid entry"
     else
 		  @objective = Objective.find_by(params[:id])
