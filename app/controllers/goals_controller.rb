@@ -49,11 +49,11 @@ class GoalsController < ApplicationController
   delete '/goals/:id/delete' do
     redirect_if_not_logged_in
     @goal = Goal.find_by(params[:id])
-    if @goal.user_id = current_user.id
+    if @goal.user_id != current_user.id
+      redirect "/goals?error=action not permitted"
+    else
       @goal.destroy
       redirect "/goals"
-    else
-      redirect "/goals?error=action not permitted"
     end
   end
   
