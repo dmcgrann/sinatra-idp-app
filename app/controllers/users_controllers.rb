@@ -10,8 +10,12 @@ class UsersController < ApplicationController
 
   post "/signup" do
     @user = User.create(username: params[:username], password: params[:password])
-    session[:user_id] = @user.id
-    redirect to '/goals'
+    if @user.valid?
+      session[:user_id] = @user.id
+      redirect to '/goals'
+    else
+      redirect to "/?error=Invalid entry"
+    end
   end
 
   get "/login" do
@@ -26,15 +30,15 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to "/goals"
+      redirect "/goals"
     else
-      redirect to "/?error=invalid entry"
+      redirect "/?error=Invalid entry"
     end
   end
   
   get '/users/:id' do
     if !logged_in?
-      redirect '/login'
+      redirect '/login?error=Please login'
     end
 
     @user = User.find(params[:id])
@@ -48,9 +52,9 @@ class UsersController < ApplicationController
   get "/logout" do
     if session[:user_id] != nil
       session.destroy
-      redirect "/login"
+      redirect "/"
     else
-      redirect "/?error=invalid entry"
+      redirect "/?error=Invalid entry"
     end
   end
 end
