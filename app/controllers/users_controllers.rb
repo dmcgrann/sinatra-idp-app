@@ -9,15 +9,9 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:password] == ""
-      redirect '/signup'
-    
-    else
-      @user = User.create(username: params[:username], password: params[:password])
-      @user[:username] != @user.username
-      session[:user_id] = @user.id
-      redirect to '/goals'
-    end
+    @user = User.create(username: params[:username], password: params[:password])
+    session[:user_id] = @user.id
+    redirect to '/goals'
   end
 
   get "/login" do
@@ -34,7 +28,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to "/goals"
     else
-      redirect to "/signup"
+      redirect to "/?error=invalid entry"
     end
   end
   
@@ -56,7 +50,7 @@ class UsersController < ApplicationController
       session.destroy
       redirect "/login"
     else
-      redirect "/"
+      redirect "/?error=invalid entry"
     end
   end
 end
